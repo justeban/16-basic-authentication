@@ -9,11 +9,11 @@ export default (req, res, next) => {
       .then(user => {
         if (!user) {
           getAuth();
+        } else {
+          req.user = user;
+          next();
         }
-        req.user = user;
-        next();
-      })
-      .catch(next);
+      });
   };
 
   let getAuth = () => {
@@ -39,10 +39,7 @@ export default (req, res, next) => {
     } 
     else if (authHeader.match(/bearer/i)) {
       auth.token = authHeader.replace(/Bearer\s+/, '');
-      authenticate(auth, next);
-    }
-    else {
-      next();
+      authenticate(auth);
     }
   } catch (e) {
     next(e);
