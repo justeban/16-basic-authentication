@@ -19,7 +19,7 @@ authRouter.get('/signin', auth, (req, res, next) => { //eslint-disable-line
   res.send(req.token);
 });
 
-authRouter.get('/api/v1/users', (req, res, next) => {
+authRouter.get('/api/v1/users', auth, (req, res, next) => {
   User.find({})
     .then(data => sendJSON(res, data))
     .catch(next);
