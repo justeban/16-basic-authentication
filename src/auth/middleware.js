@@ -47,8 +47,8 @@ export default (req, res, next) => {
     }
 
     if (authHeader.match(/basic/i)) {
-      let base64Header = authHeader.replace(/Basic\s+/, '');
-      let base64Buf = new Buffer(base64Header, 'base64');
+      let base64Header = authHeader.replace(/Basic\s+/i, '');
+      let base64Buf = Buffer.from(base64Header, 'base64');
       let [username, password] = base64Buf.toString().split(':');
       auth = { username, password };
       authenticate(auth, next);

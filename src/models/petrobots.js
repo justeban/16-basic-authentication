@@ -13,7 +13,6 @@ const petrobotSchema = mongoose.Schema({
 
 petrobotSchema.pre('findOne', function (next) {
   this.populate('userid');
-  console.log('userid');
   next();
 });
 
