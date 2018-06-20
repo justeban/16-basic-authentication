@@ -7,6 +7,7 @@ import Petrobot from '../models/petrobots.js';
 import User from './model.js';
 import auth from '../auth/middleware.js';
 
+/** description of the auth Router */
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);
   user.save()

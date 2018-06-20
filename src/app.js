@@ -16,6 +16,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
 app.use(authRouter);
 
 app.use(notFound);
@@ -23,7 +24,12 @@ app.use(errorHandler);
 
 let server = false; 
 
+/**
+ * This exports a start and stop function for the server
+ * @module app
+ */
 module.exports = {
+  /** server start */
   start: (port) => {
     if (!server) {
       server = app.listen(port, (err) => {
@@ -33,7 +39,8 @@ module.exports = {
     } else {
       console.log('Server Is Already Running');
     }
-  }, 
+  },
+  /** server stop */
   stop: () => {
     server.close( () => {
       console.log('Server Has Been Stopped');
